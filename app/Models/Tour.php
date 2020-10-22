@@ -17,7 +17,6 @@ class Tour extends Model
         'relation',
         'start',
         'end',
-        'travelers',
         'regional',
         'services',
         'driver',
@@ -42,5 +41,9 @@ class Tour extends Model
 
     public function schedule(){
         return $this->hasOne(Schedule::class);
+    }
+
+    public function travellers(){
+        return $this->hasOne(Traveler::class);
     }
 }
