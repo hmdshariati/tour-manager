@@ -10,10 +10,13 @@ Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
+import vuetify from './plugins/vuetify'
 
 const app = document.getElementById('app');
 
+
 new Vue({
+    vuetify,
     render: (h) =>
         h(InertiaApp, {
             props: {

@@ -22,4 +22,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/tours',[TourController::class,'index'])->name('tours');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->prefix('tours')
+    ->name('tours.')
+    ->group(function (){
+
+        Route::get('/',[TourController::class,'index'])->name('index');
+        Route::get('/create',[TourController::class,'create'])->name('create');
+        Route::post('/store',[TourController::class,'store'])->name('store');
+    });
