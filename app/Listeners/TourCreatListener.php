@@ -3,9 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\TourCreateEvent;
-use App\Models\Tour;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class TourCreatListener
 {
@@ -22,15 +19,18 @@ class TourCreatListener
     /**
      * Handle the event.
      *
-     * @param  TourCreateEvent  $event
+     * @param TourCreateEvent $event
      * @return void
      */
     public function handle(TourCreateEvent $event)
     {
         $tour = $event->tour;
-        if($tour->schedule->start <> $tour->start){
+        if ($tour->schedule &&
+            ($tour->schedule->start <> $tour->start ||
+                $tour->schedule->end <> $tour->end)
+        ) {
             $tour->schedule->delete();
-            $tour->createSchedule();
         }
+        $tour->createSchedule();
     }
 }

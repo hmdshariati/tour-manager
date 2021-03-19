@@ -2,24 +2,27 @@
     <app-layout>
 
         <template>
+            <slot>
+                <h1>{{schedule.start}} - {{schedule.end}}</h1>
+            </slot>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <div
-                    v-if="schedules"
-                    v-for="schedule in schedules.data" >
+                    v-if="scheduleDetails"
+                    v-for="scheduleDetail in scheduleDetails.data" >
 
                     <ul class="inline-grid grid-cols-7 gap-x-1" >
                         <li>
-                            <h1>{{schedule.id}}</h1>
-                            <h2>{{schedule.start}}</h2>
-                            <h2>{{schedule.end}}</h2>
+                            <h1>{{scheduleDetail.id}}</h1>
+                            <h2>{{scheduleDetail.date}}</h2>
+                            <h2>{{scheduleDetail.note}}</h2>
                         </li>
                     </ul>
 
                 </div>
                 <links
                     :urlsArray="paginatedLinks"
-                    :previousPageUrl="schedules.prev_page_url"
-                    :nextPageUrl="schedules.next_page_url"
+                    :previousPageUrl="scheduleDetails.prev_page_url"
+                    :nextPageUrl="scheduleDetails.next_page_url"
                 >
                 </links>
             </div>
@@ -36,12 +39,14 @@ import Links from '../shared/Links';
 export default {
     name: "List.vue",
     props: [
-        'schedules',
+        'schedule',
+        'scheduleDetails',
         'paginatedLinks'
     ],
     data() {
+        return {
 
-        return {}
+        }
     },
     components: {
         AppLayout,

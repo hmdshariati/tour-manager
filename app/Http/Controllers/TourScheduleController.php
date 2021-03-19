@@ -11,8 +11,15 @@ class TourScheduleController extends Controller
 {
     public function index(Tour $tour)
     {
-        $schedules = $tour->schedule()->paginate(10);
-        $paginateLinks = paginationLinks($schedules);
-        return Inertia::render('Tours/Schedule',compact('schedules','paginateLinks'));
+        $schedule = $tour->schedule;
+        if(!$schedule){
+            $tour->createSchedule();
+        }
+        if(!$schedule->sechduleDetails){
+            $schedule->createScheduleDetails();
+        }
+        $scheduleDetails = $schedule->scheduleDetails()->paginate(10);
+        $paginateLinks = paginationLinks($scheduleDetails);
+        return Inertia::render('Tours/Schedule',compact('schedule','scheduleDetails','paginateLinks'));
     }
 }

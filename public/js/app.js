@@ -5387,12 +5387,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "List.vue",
-  props: ['schedules', 'paginatedLinks'],
+  props: ['schedule', 'scheduleDetails', 'paginatedLinks'],
   data: function data() {
     return {};
   },
@@ -33706,23 +33709,31 @@ var render = function() {
     "app-layout",
     [
       [
+        _vm._t("default", [
+          _c("h1", [
+            _vm._v(
+              _vm._s(_vm.schedule.start) + " - " + _vm._s(_vm.schedule.end)
+            )
+          ])
+        ]),
+        _vm._v(" "),
         _c(
           "div",
           { staticClass: "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8" },
           [
-            _vm._l(_vm.schedules.data, function(schedule) {
-              return _vm.schedules
+            _vm._l(_vm.scheduleDetails.data, function(scheduleDetail) {
+              return _vm.scheduleDetails
                 ? _c("div", [
                     _c(
                       "ul",
                       { staticClass: "inline-grid grid-cols-7 gap-x-1" },
                       [
                         _c("li", [
-                          _c("h1", [_vm._v(_vm._s(schedule.id))]),
+                          _c("h1", [_vm._v(_vm._s(scheduleDetail.id))]),
                           _vm._v(" "),
-                          _c("h2", [_vm._v(_vm._s(schedule.start))]),
+                          _c("h2", [_vm._v(_vm._s(scheduleDetail.date))]),
                           _vm._v(" "),
-                          _c("h2", [_vm._v(_vm._s(schedule.end))])
+                          _c("h2", [_vm._v(_vm._s(scheduleDetail.note))])
                         ])
                       ]
                     )
@@ -33733,8 +33744,8 @@ var render = function() {
             _c("links", {
               attrs: {
                 urlsArray: _vm.paginatedLinks,
-                previousPageUrl: _vm.schedules.prev_page_url,
-                nextPageUrl: _vm.schedules.next_page_url
+                previousPageUrl: _vm.scheduleDetails.prev_page_url,
+                nextPageUrl: _vm.scheduleDetails.next_page_url
               }
             })
           ],
