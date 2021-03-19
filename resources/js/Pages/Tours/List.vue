@@ -1,5 +1,18 @@
 <template>
     <app-layout>
+
+        <!-- Page Heading -->
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <slot name="header">
+                    <inertia-link :href="route('tours.create')">
+                        Create Tour
+                    </inertia-link>
+                </slot>
+            </div>
+        </header>
+
+
         <template>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <div

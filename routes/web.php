@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TourController;
-
+use App\Http\Controllers\TourScheduleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +32,5 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::post('/store',[TourController::class,'store'])->name('store');
         Route::get('/edit/{tour}',[TourController::class,'edit'])->name('edit');
         Route::post('/update/{tour}',[TourController::class,'update'])->name('update');
+        Route::get('/{tour}/schedules',[TourScheduleController::class,'index'])->name('schedules.index');
     });

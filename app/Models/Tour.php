@@ -46,4 +46,15 @@ class Tour extends Model
     public function travellers(){
         return $this->hasOne(Traveler::class);
     }
+
+    /**
+     * create schedule for a tour
+     */
+    public function createSchedule()
+    {
+        $this->schedule()->create([
+            'start' => $this->start ?? now(),
+            'end' => $this->end ?? now()
+        ]);
+    }
 }

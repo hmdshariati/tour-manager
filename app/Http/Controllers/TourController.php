@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TourCreateEvent;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -18,7 +19,7 @@ class TourController extends Controller
     public function index(Request $request)
     {
         $tours = Tour::paginate(10);
-        $paginateLinks = $this->paginationLinks($tours);
+        $paginateLinks = paginationLinks($tours);
         return Inertia::render('Tours/List',compact('tours','paginateLinks'));
     }
 
@@ -52,51 +53,7 @@ class TourController extends Controller
     public function update(Tour $tour,Request $request)
     {
         $tour->update($request->all());
+        TourCreateEvent::dispatch($tour);
         return redirect(route('tours.index'));
-    }
-    function paginationLinks(LengthAwarePaginator $lengthAwarePaginator)
-    {
-
-        $window = UrlWindow::make($lengthAwarePaginator);
-
-        $isCurrentPageSet = false;
-
-
-        // dd($lengthAwarePaginator->toArray());
-
-        $array =  array_filter([
-            $window['first'],
-            is_array($window['slider']) ? '...' : null,
-            $window['slider'],
-            is_array($window['last']) ? '...' : null,
-            $window['last'],
-        ]);
-        $i = 1;
-        foreach($array as $index => $urlsArray):
-
-            if(is_array($urlsArray)):
-                foreach($urlsArray as $pageNumber => $link):
-                    $currentPage = $lengthAwarePaginator->currentPage();
-                    $n[] = [
-                        'pageNumber' => $pageNumber,
-                        'url' => $link,
-                        'indexKey' => $i,
-                        'type' => 'URLS',
-                        'isCurrentPage' => $currentPage === $pageNumber,
-                    ];
-                    $i++;
-                endforeach;
-            elseif(is_string($urlsArray)):
-                $n[] = [
-                    'url' => $urlsArray,
-                    'indexKey' => $i,
-                    'type' => 'ELIPSIS',
-                ];
-                $i++;
-            endif;
-
-        endforeach;
-
-        return count($n) === 1 ? null : $n;
     }
 }

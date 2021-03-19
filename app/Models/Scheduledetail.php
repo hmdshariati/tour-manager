@@ -33,4 +33,5 @@ class Scheduledetail extends Model
     {
         return $this->morphMany();
     }
+
 }
