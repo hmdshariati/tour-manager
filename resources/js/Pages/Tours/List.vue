@@ -7,7 +7,11 @@
                     v-for="tour in tours.data" >
 
                     <ul class="inline-grid grid-cols-7 gap-x-1" >
-                        <li>{{ tour.title }}</li>
+                        <li>
+                            <inertia-link :href="route('tours.edit',tour.id)">
+                                {{ tour.title }}
+                            </inertia-link>
+                        </li>
                         <li>{{ tour.code }}</li>
                         <li>{{ tour.start }}</li>
                         <li>{{ tour.end }}</li>

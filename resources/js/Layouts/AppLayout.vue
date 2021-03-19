@@ -17,6 +17,9 @@
                             <jet-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
                                 Dashboard
                             </jet-nav-link>
+                            <jet-nav-link :href="route('tours.index')" :active="$page.currentRouteName == 'tours.index'">
+                                Tours
+                            </jet-nav-link>
                         </div>
                     </div>
 
@@ -195,7 +198,11 @@
         <!-- Page Heading -->
         <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <slot name="header"></slot>
+                <slot name="header">
+                    <inertia-link :href="route('tours.create')">
+                        Create Tour
+                    </inertia-link>
+                </slot>
             </div>
         </header>
 

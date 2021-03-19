@@ -1,8 +1,8 @@
 <template>
-    <jet-form-section @submitted="createTour">
+    <jet-form-section @submitted="submit">
         <template #title>
             Tour Details
-        </template>store
+        </template>
 
         <template #description>
             Create a new Tour.
@@ -66,7 +66,7 @@
 
                 <div class="flex items-center mt-2">
 
-                    <jet-input id="start" type="text" class="mt-1 block w-full" v-model="form.start" autofocus required/>
+                    <jet-input id="start" type="date" class="mt-1 block w-full" v-model="form.start" autofocus required/>
                     <jet-input-error :message="form.error('start')" class="mt-2"/>
                 </div>
             </div>
@@ -76,7 +76,7 @@
 
                 <div class="flex items-center mt-2">
 
-                    <jet-input id="end" type="text" class="mt-1 block w-full" v-model="form.end" autofocus required/>
+                    <jet-input id="end" type="date" class="mt-1 block w-full" v-model="form.end" autofocus required/>
                     <jet-input-error :message="form.error('end')" class="mt-2"/>
                 </div>
             </div>
@@ -112,33 +112,13 @@ export default {
         JetInputError,
         JetLabel,
     },
-
-    data() {
-        return {
-            form: this.$inertia.form({
-                title: '',
-                type: '',
-                code: '',
-                regional: '',
-                start: '',
-                end: '',
-                relation: '',
-                services: '',
-                driver: '',
-                notes: '',
-            }, {
-                bag: 'createTour',
-                resetOnSuccess: false,
-            })
+    props:[
+        'form'
+    ],
+    methods:{
+        submit() {
+            this.$emit('submitTour',this.form)
         }
-    },
-
-    methods: {
-        createTour() {
-            this.form.post(route('tours.store'), {
-                preserveScroll: true
-            });
-        },
-    },
+    }
 }
 </script>

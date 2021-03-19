@@ -15,7 +15,8 @@ class TourController extends Controller
      * @param Request $request
      * @return \Inertia\Response
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $tours = Tour::paginate(10);
         $paginateLinks = $this->paginationLinks($tours);
         return Inertia::render('Tours/List',compact('tours','paginateLinks'));
@@ -32,12 +33,27 @@ class TourController extends Controller
         return Inertia::render('Tours/Create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         Tour::create($request->all());
 
         return redirect(route('tours.index'));
     }
 
+    /**
+     * @param Tour $tour
+     * @return \Inertia\Response
+     */
+    public function edit(Tour $tour)
+    {
+        return Inertia::render('Tours/Edit',compact('tour'));
+    }
+
+    public function update(Tour $tour,Request $request)
+    {
+        $tour->update($request->all());
+        return redirect(route('tours.index'));
+    }
     function paginationLinks(LengthAwarePaginator $lengthAwarePaginator)
     {
 

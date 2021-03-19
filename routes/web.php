@@ -30,4 +30,6 @@ Route::middleware(['auth:sanctum', 'verified'])
         Route::get('/',[TourController::class,'index'])->name('index');
         Route::get('/create',[TourController::class,'create'])->name('create');
         Route::post('/store',[TourController::class,'store'])->name('store');
+        Route::get('/edit/{tour}',[TourController::class,'edit'])->name('edit');
+        Route::post('/update/{tour}',[TourController::class,'update'])->name('update');
     });

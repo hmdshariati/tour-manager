@@ -1,8 +1,8 @@
 <template>
-    <jet-form-section @submitted="createTour">
+    <jet-form-section @submitted="submit">
         <template #title>
             Tour Details
-        </template>store
+        </template>
 
         <template #description>
             Create a new Tour.
@@ -16,7 +16,7 @@
 
                     <div class="ml-4 leading-tight">
                         <jet-input id="title" type="text" class="mt-1 block w-full" v-model="form.title" autofocus/>
-                        <jet-input-error :message="form.error('title')" class="mt-2"/>
+<!--                        <jet-input-error :message="form.error('title')" class="mt-2"/>-->
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="flex items-center mt-2">
 
                     <jet-input id="type" type="text" class="mt-1 block w-full" v-model="form.type" autofocus/>
-                    <jet-input-error :message="form.error('type')" class="mt-2"/>
+<!--                    <jet-input-error :message="form.error('type')" class="mt-2"/>-->
                 </div>
             </div>
 
@@ -37,7 +37,7 @@
                 <div class="flex items-center mt-2">
 
                     <jet-input id="code" type="text" class="mt-1 block w-full" v-model="form.code" autofocus required/>
-                    <jet-input-error :message="form.error('code')" class="mt-2"/>
+<!--                    <jet-input-error :message="form.error('code')" class="mt-2"/>-->
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                 <div class="flex items-center mt-2">
 
                     <jet-input id="relation" type="text" class="mt-1 block w-full" v-model="form.relation" autofocus required/>
-                    <jet-input-error :message="form.error('relation')" class="mt-2"/>
+<!--                    <jet-input-error :message="form.error('relation')" class="mt-2"/>-->
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                 <div class="flex items-center mt-2">
 
                     <jet-input id="regional" type="text" class="mt-1 block w-full" v-model="form.regional" autofocus required/>
-                    <jet-input-error :message="form.error('regional')" class="mt-2"/>
+<!--                    <jet-input-error :message="form.error('regional')" class="mt-2"/>-->
                 </div>
             </div>
 
@@ -66,8 +66,8 @@
 
                 <div class="flex items-center mt-2">
 
-                    <jet-input id="start" type="text" class="mt-1 block w-full" v-model="form.start" autofocus required/>
-                    <jet-input-error :message="form.error('start')" class="mt-2"/>
+                    <jet-input id="start" type="date" class="mt-1 block w-full" v-model="form.start" autofocus required/>
+<!--                    <jet-input-error :message="form.error('start')" class="mt-2"/>-->
                 </div>
             </div>
 
@@ -76,8 +76,8 @@
 
                 <div class="flex items-center mt-2">
 
-                    <jet-input id="end" type="text" class="mt-1 block w-full" v-model="form.end" autofocus required/>
-                    <jet-input-error :message="form.error('end')" class="mt-2"/>
+                    <jet-input id="end" type="date" class="mt-1 block w-full" v-model="form.end" autofocus required/>
+<!--                    <jet-input-error :message="form.error('end')" class="mt-2"/>-->
                 </div>
             </div>
 
@@ -112,33 +112,21 @@ export default {
         JetInputError,
         JetLabel,
     },
-
-    data() {
-        return {
-            form: this.$inertia.form({
-                title: '',
-                type: '',
-                code: '',
-                regional: '',
-                start: '',
-                end: '',
-                relation: '',
-                services: '',
-                driver: '',
-                notes: '',
-            }, {
-                bag: 'createTour',
-                resetOnSuccess: false,
-            })
+    data(){
+      return{
+          form: {}
+      }
+    },
+    props:[
+        'formdata'
+    ],
+    methods:{
+        submit() {
+            this.$inertia.post(route('tours.update',this.form.id),this.form)
         }
     },
-
-    methods: {
-        createTour() {
-            this.form.post(route('tours.store'), {
-                preserveScroll: true
-            });
-        },
-    },
+    mounted(){
+        this.form = this.formdata
+    }
 }
 </script>
