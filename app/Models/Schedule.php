@@ -36,7 +36,7 @@ class Schedule extends Model
         $dateRange = [
           ['date' => $start->format('Y-m-d')]
         ];
-        for ($day = 0 ; $day < $diffDays ; $day++){
+        for ($day = 1 ; $day <= $diffDays ; $day++){
             $date = $start->addDay($day);
             $dateRange[] = ['date' => $date->format('Y-m-d')];
         }

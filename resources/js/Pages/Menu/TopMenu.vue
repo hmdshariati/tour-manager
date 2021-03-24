@@ -6,7 +6,7 @@
                 <ul class="top-menu">
                     <li>
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                            Edit Tour
+                            <inertia-link :href="'/tours/edit/'+tour.id" method="get">Edit Tour</inertia-link>
                         </h2>
                     </li>
                     <li>

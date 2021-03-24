@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\TourCreateEvent;
+use App\Http\Requests\TourStoreRequest;
+use App\Http\Requests\TourUpdateRequest;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -34,7 +36,7 @@ class TourController extends Controller
         return Inertia::render('Tours/Create');
     }
 
-    public function store(Request $request)
+    public function store(TourStoreRequest $request)
     {
         Tour::create($request->all());
 
@@ -50,7 +52,7 @@ class TourController extends Controller
         return Inertia::render('Tours/Edit',compact('tour'));
     }
 
-    public function update(Tour $tour,Request $request)
+    public function update(Tour $tour,TourUpdateRequest $request)
     {
         $tour->update($request->all());
         TourCreateEvent::dispatch($tour);

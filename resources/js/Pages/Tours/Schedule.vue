@@ -1,7 +1,7 @@
 <template>
     <app-layout>
-
-        <template>
+        <top-menu :tour="tour"/>
+        <template v-if="schedule">
             <slot>
                 <h1>{{schedule.start}} - {{schedule.end}}</h1>
             </slot>
@@ -35,10 +35,12 @@
 import AppLayout from "../../Layouts/AppLayout";
 import JetSectionBorder from "../../Jetstream/SectionBorder";
 import Links from '../shared/Links';
+import TopMenu from "../Menu/TopMenu";
 
 export default {
-    name: "List.vue",
+    name: "Schedule.vue",
     props: [
+        'tour',
         'schedule',
         'scheduleDetails',
         'paginatedLinks'
@@ -51,7 +53,8 @@ export default {
     components: {
         AppLayout,
         JetSectionBorder,
-        Links
+        Links,
+        TopMenu,
     },
 
 }

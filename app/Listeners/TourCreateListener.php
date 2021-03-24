@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\TourCreateEvent;
 
-class TourCreatListener
+class TourCreateListener
 {
     /**
      * Create the event listener.
@@ -31,6 +31,8 @@ class TourCreatListener
         ) {
             $tour->schedule->delete();
         }
-        $tour->createSchedule();
+        $schedule = $tour->createSchedule();
+        $schedule->createScheduleDetails();
+
     }
 }

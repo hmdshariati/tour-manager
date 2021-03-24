@@ -5358,6 +5358,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Jetstream/SectionBorder */ "./resources/js/Jetstream/SectionBorder.vue");
 /* harmony import */ var _shared_Links__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/Links */ "./resources/js/Pages/shared/Links.vue");
+/* harmony import */ var _Menu_TopMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Menu/TopMenu */ "./resources/js/Pages/Menu/TopMenu.vue");
 //
 //
 //
@@ -5390,19 +5391,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "List.vue",
-  props: ['schedule', 'scheduleDetails', 'paginatedLinks'],
+  name: "Schedule.vue",
+  props: ['tour', 'schedule', 'scheduleDetails', 'paginatedLinks'],
   data: function data() {
     return {};
   },
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     JetSectionBorder: _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Links: _shared_Links__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Links: _shared_Links__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TopMenu: _Menu_TopMenu__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 
@@ -30533,7 +30536,28 @@ var render = function() {
       [
         _vm._t("header", [
           _c("ul", { staticClass: "top-menu" }, [
-            _vm._m(0),
+            _c("li", [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      attrs: {
+                        href: "/tours/edit/" + _vm.tour.id,
+                        method: "get"
+                      }
+                    },
+                    [_vm._v("Edit Tour")]
+                  )
+                ],
+                1
+              )
+            ]),
             _vm._v(" "),
             _c(
               "li",
@@ -30558,20 +30582,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "h2",
-        { staticClass: "font-semibold text-xl text-gray-800 leading-tight" },
-        [_vm._v("\n                        Edit Tour\n                    ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -33708,50 +33719,54 @@ var render = function() {
   return _c(
     "app-layout",
     [
-      [
-        _vm._t("default", [
-          _c("h1", [
-            _vm._v(
-              _vm._s(_vm.schedule.start) + " - " + _vm._s(_vm.schedule.end)
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8" },
-          [
-            _vm._l(_vm.scheduleDetails.data, function(scheduleDetail) {
-              return _vm.scheduleDetails
-                ? _c("div", [
-                    _c(
-                      "ul",
-                      { staticClass: "inline-grid grid-cols-7 gap-x-1" },
-                      [
-                        _c("li", [
-                          _c("h1", [_vm._v(_vm._s(scheduleDetail.id))]),
-                          _vm._v(" "),
-                          _c("h2", [_vm._v(_vm._s(scheduleDetail.date))]),
-                          _vm._v(" "),
-                          _c("h2", [_vm._v(_vm._s(scheduleDetail.note))])
-                        ])
-                      ]
-                    )
-                  ])
-                : _vm._e()
-            }),
+      _c("top-menu", { attrs: { tour: _vm.tour } }),
+      _vm._v(" "),
+      _vm.schedule
+        ? [
+            _vm._t("default", [
+              _c("h1", [
+                _vm._v(
+                  _vm._s(_vm.schedule.start) + " - " + _vm._s(_vm.schedule.end)
+                )
+              ])
+            ]),
             _vm._v(" "),
-            _c("links", {
-              attrs: {
-                urlsArray: _vm.paginatedLinks,
-                previousPageUrl: _vm.scheduleDetails.prev_page_url,
-                nextPageUrl: _vm.scheduleDetails.next_page_url
-              }
-            })
-          ],
-          2
-        )
-      ]
+            _c(
+              "div",
+              { staticClass: "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8" },
+              [
+                _vm._l(_vm.scheduleDetails.data, function(scheduleDetail) {
+                  return _vm.scheduleDetails
+                    ? _c("div", [
+                        _c(
+                          "ul",
+                          { staticClass: "inline-grid grid-cols-7 gap-x-1" },
+                          [
+                            _c("li", [
+                              _c("h1", [_vm._v(_vm._s(scheduleDetail.id))]),
+                              _vm._v(" "),
+                              _c("h2", [_vm._v(_vm._s(scheduleDetail.date))]),
+                              _vm._v(" "),
+                              _c("h2", [_vm._v(_vm._s(scheduleDetail.note))])
+                            ])
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _c("links", {
+                  attrs: {
+                    urlsArray: _vm.paginatedLinks,
+                    previousPageUrl: _vm.scheduleDetails.prev_page_url,
+                    nextPageUrl: _vm.scheduleDetails.next_page_url
+                  }
+                })
+              ],
+              2
+            )
+          ]
+        : _vm._e()
     ],
     2
   )

@@ -23,27 +23,33 @@ class Tour extends Model
         'notes'
     ];
 
-    public function starter(){
-        return $this->belongsTo(User::class,'starter_id');
+    public function starter()
+    {
+        return $this->belongsTo(User::class, 'starter_id');
     }
 
-    public function guide(){
-        return $this->belongsTo(User::class,'guide_id');
+    public function guide()
+    {
+        return $this->belongsTo(User::class, 'guide_id');
     }
 
-    public function actionboss(){
-        return $this->belongsTo(User::class,'actionboss_id');
+    public function actionboss()
+    {
+        return $this->belongsTo(User::class, 'actionboss_id');
     }
 
-    public function boss(){
-        return $this->belongsTo(User::class,'boss_id');
+    public function boss()
+    {
+        return $this->belongsTo(User::class, 'boss_id');
     }
 
-    public function schedule(){
+    public function schedule()
+    {
         return $this->hasOne(Schedule::class);
     }
 
-    public function travellers(){
+    public function travellers()
+    {
         return $this->hasOne(Traveler::class);
     }
 
@@ -52,9 +58,29 @@ class Tour extends Model
      */
     public function createSchedule()
     {
-        $this->schedule()->create([
-            'start' => $this->start ?? now(),
-            'end' => $this->end ?? now()
-        ]);
+        return Schedule::find(
+            Schedule::insertGetId([
+                'tour_id' => $this->id,
+                'start' => $this->start ?? now(),
+                'end' => $this->end ?? now()
+            ])
+        );
+
+    }
+
+    public function fetchSchedule()
+    {
+        if ($this->start && $this->end) {
+            if (!$this->schedule) {
+                $this->createSchedule();
+            }
+            if ($this->schedule->scheduleDetails->isEmpty()) {
+                $this->schedule->createScheduleDetails();
+            }
+
+            return $this->schedule;
+        } else {
+            return null;
+        }
     }
 }
