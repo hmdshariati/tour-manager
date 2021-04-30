@@ -34,15 +34,15 @@ class Schedule extends Model
         $end = Carbon::createFromTimestamp(strtotime($this->end));
         $diffDays = $end->diffInDays($start);
         $dateRange = [
-          ['date' => $start->format('Y-m-d')]
+            ['date' => $start->format('Y-m-d')]
         ];
-        for ($day = 1 ; $day <= $diffDays ; $day++){
+        for ($day = 1; $day <= $diffDays; $day++) {
             $date = $start->addDay($day);
             $dateRange[] = ['date' => $date->format('Y-m-d')];
         }
         $this->scheduleDetails()->createMany($dateRange);
         if ($oldScheduleDetails) {
-            foreach ($this->scheduleDetails as $scheduleDetail){
+            foreach ($this->scheduleDetails as $scheduleDetail) {
 
             }
 

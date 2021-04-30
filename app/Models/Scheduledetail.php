@@ -17,6 +17,8 @@ class Scheduledetail extends Model
         'attention'
     ];
 
+    protected $appends = ['city_name'];
+
     public function schedule(){
         return $this->belongsTo(Schedule::class);
     }
@@ -34,4 +36,8 @@ class Scheduledetail extends Model
         return $this->morphMany();
     }
 
+    public function getCityNameAttribute()
+    {
+        return $this->city_id ? City::find($this->city_id)->title : '';
+    }
 }

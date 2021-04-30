@@ -3,15 +3,12 @@
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\UrlWindow;
 
-function paginationLinks(LengthAwarePaginator $lengthAwarePaginator)
+function createPaginationLinks(LengthAwarePaginator $lengthAwarePaginator)
 {
 
     $window = UrlWindow::make($lengthAwarePaginator);
 
     $isCurrentPageSet = false;
-
-
-    // dd($lengthAwarePaginator->toArray());
 
     $array =  array_filter([
         $window['first'],

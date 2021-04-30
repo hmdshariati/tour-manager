@@ -12,7 +12,7 @@ class TourScheduleController extends Controller
         $schedule = $tour->fetchSchedule();
         if ($schedule) {
             $scheduleDetails = $schedule->scheduleDetails()->paginate(10);
-            $paginateLinks = paginationLinks($scheduleDetails);
+            $paginateLinks = createPaginationLinks($scheduleDetails);
             return Inertia::render('Tours/Schedule', compact('tour','schedule', 'scheduleDetails', 'paginateLinks'));
         }else{
             return Inertia::render('Tours/Schedule', compact('tour','schedule'));

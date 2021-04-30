@@ -21,7 +21,7 @@ class TourController extends Controller
     public function index(Request $request)
     {
         $tours = Tour::paginate(10);
-        $paginateLinks = paginationLinks($tours);
+        $paginateLinks = createPaginationLinks($tours);
         return Inertia::render('Tours/List',compact('tours','paginateLinks'));
     }
 
