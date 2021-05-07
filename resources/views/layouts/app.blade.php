@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head class="text-gray-900 leading-tight">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- CSRF Token -->
@@ -19,76 +19,97 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <style>
+        @import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
 
+        /*
+        module.exports = {
+            plugins: [
+                require('tailwindcss-inset')({
+                    insets: {
+                        full: '100%'
+                    }
+                })
+            ]
+        };
+        */
+        .inset-l-full {
+            left: 100%;
+        }
+    </style>
     @livewireStyles
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Toranj Tours Agency
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="min-h-screen bg-gray-100">
+<div id="app">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+    <!-- https://tailwindcomponents.com/component/megamenu -->
+    <div class="min-w-screen min-h-screen bg-gray-200 px-5 pb-5 pt-20">
+        <div class="py-3 px-5 bg-white rounded shadow-xl">
+            <nav class="-mx-1 navbar navbar-expand-md navbar-light bg-white shadow-sm">
+                {{--                <div class="-mx-1">--}}
+                <ul class="flex w-full flex-wrap items-center h-10">
+                    @guest
+                        <li></li>
+                    @else
+                    <li class="block relative" x-data="{showChildren:false}" @click.away="showChildren=false">
 
-                    </ul>
+                        <a href="{{ route('login') }}"
+                           class="flex items-center h-10 leading-10 px-4 rounded cursor-pointer no-underline hover:no-underline transition-colors duration-100 mx-1 bg-indigo-500 text-white"
+                           @click.prevent="showChildren=!showChildren">
+                            <span class="mr-3 text-xl"> <i class="mdi mdi-gauge"></i> </span>
+                            <span>{{ Auth::user()->name }}</span>
+                            <span class="ml-2"> <i class="mdi mdi-chevron-down"></i> </span>
+                        </a>
+                        <div
+                            class="bg-white shadow-md rounded border border-gray-300 text-sm absolute top-auto left-0 min-w-full w-56 z-30 mt-1"
+                            x-show="showChildren" style="display: none;"
+                            x-transition:enter="transition ease duration-300 transform"
+                            x-transition:enter-start="opacity-0 translate-y-2"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease duration-300 transform"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 translate-y-4">
+                            <span
+                                class="absolute top-0 left-0 w-3 h-3 bg-white border transform rotate-45 -mt-1 ml-6"></span>
+                            <div class="bg-white rounded w-full relative z-10 py-1">
+                                <ul class="list-reset">
+                                    <li class="relative" x-data="{showChildren:false}" @mouseleave="showChildren=false"
+                                        @mouseenter="showChildren=true">
+                                        <a href="{{ route('logout') }}"
+                                           class="px-4 py-2 flex w-full items-start hover:bg-gray-100 no-underline hover:no-underline transition-colors duration-100 cursor-pointer"
+                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <span class="flex-1">{{ __('Logout') }}</span>
+                                        </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                        <li>
-                            <a href="/tours"> Tours list</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-            {{ $slot ?? '' }}
-        </main>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="block relative">
+                        <a href="/tours"
+                           class="flex items-center h-10 leading-10 px-4 rounded cursor-pointer no-underline hover:no-underline transition-colors duration-100 mx-1 hover:bg-gray-100">
+                            <span class="mr-3 text-xl"> <i class="mdi mdi-widgets-outline"></i> </span>
+                            <span>Tours</span>
+                        </a>
+                    </li>
+                    @endguest
+                </ul>
+            </nav>
+            <main class="py-4">
+                @yield('content')
+                {{ $slot ?? '' }}
+            </main>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
-    @livewireScripts
+</div>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+@livewireScripts
 </body>
 </html>
