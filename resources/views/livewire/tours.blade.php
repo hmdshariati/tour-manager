@@ -12,6 +12,10 @@
                        class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mx-auto bg-white rounded-xl shadow-m"/>
                 <input wire:model="relation" type="text"
                        class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mx-auto bg-white rounded-xl shadow-m"/>
+                <input wire:model="start" type="date"
+                       class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mx-auto bg-white rounded-xl shadow-m"/>
+                <input wire:model="end" type="date"
+                       class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mx-auto bg-white rounded-xl shadow-m"/>
                 <button type="submit"
                         class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 mx-auto bg-white rounded-xl shadow-m">
                     submit

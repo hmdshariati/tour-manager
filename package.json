@@ -32,9 +32,11 @@
         "@tailwindcss/aspect-ratio": "^0.2.0",
         "@tailwindcss/forms": "^0.3.2",
         "@tailwindcss/typography": "^0.4.0",
+        "alpinejs": "^3.1.1",
         "babel-polyfill": "^6.26.0",
         "es6-promise": "^4.2.8",
         "lodash": "^4.17.15",
+        "material-design-icons": "^3.0.1",
         "vue-meta": "^2.3.1"
     }
 }

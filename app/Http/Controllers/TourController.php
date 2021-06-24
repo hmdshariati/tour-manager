@@ -55,7 +55,6 @@ class TourController extends Controller
     public function update(Tour $tour,TourUpdateRequest $request)
     {
         $tour->update($request->all());
-        TourCreateEvent::dispatch($tour);
         return redirect(route('tours.index'));
     }
 }

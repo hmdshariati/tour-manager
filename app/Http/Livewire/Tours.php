@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Tours extends Component
 {
-    public $tour, $title, $type, $code, $relation;
+    public $tour, $title, $type, $code, $relation, $start, $end;
 
     public function mount($tour)
     {
@@ -16,6 +16,8 @@ class Tours extends Component
         $this->type = $tour->type;
         $this->code = $tour->code;
         $this->relation = $tour->relation;
+        $this->start = $tour->start;
+        $this->end = $tour->end;
     }
 
     public function changeProp()
@@ -26,6 +28,8 @@ class Tours extends Component
             'code' => $this->code,
             'type' => $this->type,
             'relation' => $this->relation,
+            'start' => $this->star,
+            'end' => $this->end,
         ]);
 
     }

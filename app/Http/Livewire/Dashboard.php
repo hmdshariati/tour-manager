@@ -18,6 +18,11 @@ class Dashboard extends Component
         $this->redirect('/tours/$id');
     }
 
+    public function createTour()
+    {
+        $this->dispatchBrowserEvent('open-creat');
+    }
+
 //    protected $queryString = ['tour_id'];
 
     public function render()
