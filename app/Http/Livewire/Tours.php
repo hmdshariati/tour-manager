@@ -28,10 +28,10 @@ class Tours extends Component
             'code' => $this->code,
             'type' => $this->type,
             'relation' => $this->relation,
-            'start' => $this->star,
+            'start' => $this->start,
             'end' => $this->end,
         ]);
-
+        $this->dispatchBrowserEvent('close-update');
     }
     public function render()
     {
