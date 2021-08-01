@@ -3,7 +3,7 @@
 
 # update application cache
 php artisan optimize
-
+php artisan migrate --seed
 # start the application
 
-php-fpm -D &&  nginx -g "daemon off;"
+php-fpm -R -F #&&  nginx -g "daemon off;"
