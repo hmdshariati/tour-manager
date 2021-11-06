@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Tour;
 use App\Observers\TourObserver;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Tour::observe(TourObserver::class);
+        Schema::defaultStringLength(191);
     }
 }

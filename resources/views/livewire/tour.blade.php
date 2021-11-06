@@ -1,17 +1,16 @@
-<div x-data="{show: false}" @keydown        }
-
-     .escape="show = false" :class="{'modal-active' : show}">
+<div x-data="{show: false}"  :class="{'modal-active' : show}">
     <style>
         .modal {
             transition: opacity 0.25s ease;
-        body.modal-active {pointer
+        }
+        body.modal-active {
             overflow-x: hidden;
             overflow-y: visible !important;
         }
     </style>
 
     <!--Modal-->
-    <div :class="{'opacity-0 -events-none': !show}" @open-creat.window="show = true"
+    <div :class="{'opacity-0 pointer-events-none': !show}" @open-creat.window="show = true"
          class="modal  fixed w-full h-full top-0 left-0 flex items-center justify-center">
         <div @click="show = false" class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
@@ -80,7 +79,7 @@
         </div>
     </div>
 
-    <!--    <script>
+<!--        <script>
             var openmodal = document.querySelectorAll('.modal-open')
             for (var i = 0; i < openmodal.length; i++) {
                 openmodal[i].addEventListener('click', function (event) {

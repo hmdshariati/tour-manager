@@ -3,14 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourScheduleController;
+use App\Http\Controllers\MainController;
+
+Route::get('/c/run2', [App\Http\Controllers\HomeController::class, 'index'])->name('command2');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('main');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [MainController::class,'main'])->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('tours')
@@ -28,3 +29,8 @@ Route::middleware(['auth:sanctum', 'verified'])
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/command', [\App\Http\Controllers\CommandController::class, 'index'])->name('command.index');
+Route::get('/event', function (){
+    event(new \App\Events\MessagePushed());
+    dd('fired');
+})->name('event');
