@@ -10,7 +10,7 @@
         </ul>
     </div>
     <div x-show="tab === 'prop'">
-        <livewire:tours  :tour="$tour" />
+        <livewire:tour-properties  :tour="$tour" />
     </div>
     <div x-show="tab === 'sched'">
         <livewire:schedule  :tour="$tour" />

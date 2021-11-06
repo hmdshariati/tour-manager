@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
-class Tours extends Component
+class TourProperties extends Component
 {
     public $tour, $title, $type, $code, $relation, $start, $end;
 
@@ -35,6 +35,6 @@ class Tours extends Component
     }
     public function render()
     {
-        return view('livewire.tours');
+        return view('livewire.tour-properties');
     }
 }

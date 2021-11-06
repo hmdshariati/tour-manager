@@ -17,7 +17,6 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->prefix('tours')
     ->name('tours.')
     ->group(function (){
-
         Route::get('/',\App\Http\Livewire\Dashboard::class)->name('index');
         Route::get('/create',[TourController::class,'create'])->name('create');
         Route::post('/store',[TourController::class,'store'])->name('store');

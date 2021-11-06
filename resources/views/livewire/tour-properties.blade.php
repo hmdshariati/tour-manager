@@ -1,4 +1,4 @@
-<div x-data="{showUpdating: true}" :class="{'modal-active' : showUpdating}">
+<div x-data="{showUpdating: false}" :class="{'modal-active' : showUpdating}">
 
 <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
     <div class="md:flex">
